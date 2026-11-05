@@ -105,8 +105,8 @@ export const PracticeEngine: React.FC = () => {
     if (correct) {
       try {
         confetti({
-          particleCount: 60,
-          spread: 65,
+          particleCount: 50,
+          spread: 60,
           origin: { y: 0.7 },
           colors: ['#10b981', '#059669', '#34d399', '#f59e0b'],
         });
@@ -152,21 +152,21 @@ export const PracticeEngine: React.FC = () => {
 
   if (filteredQuestions.length === 0) {
     return (
-      <div className="bg-white border border-slate-200 rounded-2xl p-10 text-center space-y-4 card-shadow">
-        <div className="w-14 h-14 rounded-xl bg-emerald-50 flex items-center justify-center mx-auto text-emerald-500">
-          <BookOpen className="w-7 h-7" />
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 text-center space-y-4 card-shadow">
+        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-emerald-50 flex items-center justify-center mx-auto text-emerald-500">
+          <BookOpen className="w-6 h-6 sm:w-7 sm:h-7" />
         </div>
-        <h3 className="text-lg font-bold text-slate-800">Nothing here yet</h3>
-        <p className="text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
+        <h3 className="text-base sm:text-lg font-bold text-slate-800">Nothing in this filter</h3>
+        <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
           {filterMode === 'review'
-            ? 'You have no questions in the review queue for this section — keep it up.'
+            ? 'No questions currently in your review queue.'
             : filterMode === 'bookmarked'
-            ? 'No bookmarks saved yet. Hit the bookmark icon on any question to save it for later.'
-            : 'Try a different chapter filter.'}
+            ? 'No bookmarks saved yet. Hit the bookmark icon on any question.'
+            : 'Try selecting a different chapter or mode.'}
         </p>
         <button
           onClick={() => { setSelectedChapter('all'); setFilterMode('all'); }}
-          className="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg text-sm transition-colors cursor-pointer"
+          className="w-full sm:w-auto px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs sm:text-sm transition-colors cursor-pointer"
         >
           Show all questions
         </button>
@@ -177,69 +177,70 @@ export const PracticeEngine: React.FC = () => {
   const optionLetters = ['A', 'B', 'C', 'D', 'E'];
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4 sm:space-y-5">
 
-      {/* Stats strip — natural asymmetric layout */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      {/* Stats strip — responsive grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3">
         {/* Hero stat */}
         <div
-          className="col-span-2 md:col-span-1 rounded-xl p-4 text-white flex items-end justify-between"
+          className="col-span-2 md:col-span-1 rounded-xl p-3 sm:p-4 text-white flex items-end justify-between shadow-xs"
           style={{ background: 'linear-gradient(135deg, #059669 0%, #10b981 100%)' }}
         >
           <div>
-            <div className="text-2xl font-bold leading-none">{points.toLocaleString()}</div>
-            <div className="text-emerald-100 text-xs mt-1 font-medium">points earned</div>
+            <div className="text-xl sm:text-2xl font-bold leading-none">{points.toLocaleString()}</div>
+            <div className="text-emerald-100 text-[11px] sm:text-xs mt-1 font-medium">points earned</div>
           </div>
-          <Trophy className="w-7 h-7 text-emerald-200 mb-0.5" />
+          <Trophy className="w-6 h-6 sm:w-7 sm:h-7 text-emerald-200 mb-0.5" />
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-4 card-shadow">
-          <div className="text-xs text-slate-400 font-medium mb-1">Accuracy</div>
-          <div className="text-xl font-bold text-slate-800">{accuracyPct}%</div>
-          <div className="mt-2 h-1 bg-slate-100 rounded-full overflow-hidden">
+        <div className="bg-white border border-slate-200 rounded-xl p-3 sm:p-4 card-shadow">
+          <div className="text-[11px] sm:text-xs text-slate-400 font-medium mb-0.5">Accuracy</div>
+          <div className="text-lg sm:text-xl font-bold text-slate-800">{accuracyPct}%</div>
+          <div className="mt-1.5 h-1 bg-slate-100 rounded-full overflow-hidden">
             <div className="h-full bg-emerald-400 rounded-full transition-all" style={{ width: `${accuracyPct}%` }} />
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-4 card-shadow">
-          <div className="text-xs text-slate-400 font-medium mb-1">Mastered</div>
-          <div className="text-xl font-bold text-emerald-600">
+        <div className="bg-white border border-slate-200 rounded-xl p-3 sm:p-4 card-shadow">
+          <div className="text-[11px] sm:text-xs text-slate-400 font-medium mb-0.5">Mastered</div>
+          <div className="text-lg sm:text-xl font-bold text-emerald-600">
             {correctCount}
-            <span className="text-sm font-medium text-slate-400 ml-1">/ {totalQuestions}</span>
+            <span className="text-xs font-medium text-slate-400 ml-1">/ {totalQuestions}</span>
           </div>
-          <div className="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
-            <Target className="w-3 h-3" /> concepts
+          <div className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 flex items-center gap-1">
+            <Target className="w-3 h-3 text-emerald-500" /> concepts
           </div>
         </div>
 
-        <div className="bg-white border border-slate-200 rounded-xl p-4 card-shadow">
-          <div className="text-xs text-slate-400 font-medium mb-1">Review queue</div>
-          <div className="text-xl font-bold text-rose-500">{reviewCount}</div>
-          <div className="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+        <div className="bg-white border border-slate-200 rounded-xl p-3 sm:p-4 card-shadow">
+          <div className="text-[11px] sm:text-xs text-slate-400 font-medium mb-0.5">Review queue</div>
+          <div className="text-lg sm:text-xl font-bold text-rose-500">{reviewCount}</div>
+          <div className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 flex items-center gap-1">
             <Flame className="w-3 h-3 text-rose-400" /> to revisit
           </div>
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="bg-white border border-slate-200 rounded-xl px-4 py-3 card-shadow">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          {/* Chapter filters */}
-          <div className="flex flex-wrap gap-2">
+      {/* Filters (touch scrollable on mobile) */}
+      <div className="bg-white border border-slate-200 rounded-xl p-3 sm:px-4 sm:py-3 card-shadow space-y-2.5 sm:space-y-0">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+
+          {/* Chapter chips — horizontal scroll with touch support */}
+          <div className="flex overflow-x-auto no-scrollbar gap-1.5 pb-1 sm:pb-0 -mx-1 px-1">
             {([
               { id: 'all' as const, label: 'All' },
-              { id: 'ch1' as const, label: 'Ch 1 — Refresher' },
-              { id: 'ch2' as const, label: 'Ch 2 — Assembly' },
-              { id: 'ch3' as const, label: 'Ch 3 — PSW' },
-              { id: 'ch4' as const, label: 'Ch 4 — Interrupts' },
+              { id: 'ch1' as const, label: 'Ch 1: Refresher' },
+              { id: 'ch2' as const, label: 'Ch 2: Assembly' },
+              { id: 'ch3' as const, label: 'Ch 3: PSW' },
+              { id: 'ch4' as const, label: 'Ch 4: Interrupts' },
             ] as { id: ChapterId; label: string }[]).map((ch) => (
               <button
                 key={ch.id}
                 onClick={() => { setSelectedChapter(ch.id); setCurrentIndex(0); }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all shrink-0 cursor-pointer ${
                   selectedChapter === ch.id
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    ? 'bg-emerald-600 text-white shadow-xs'
+                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200 active:bg-slate-300'
                 }`}
               >
                 {ch.label}
@@ -247,8 +248,8 @@ export const PracticeEngine: React.FC = () => {
             ))}
           </div>
 
-          {/* View mode */}
-          <div className="flex items-center gap-1 bg-slate-100 rounded-lg p-1 self-start sm:self-auto">
+          {/* View mode toggle */}
+          <div className="flex items-center gap-1 bg-slate-100 rounded-lg p-1 overflow-x-auto no-scrollbar shrink-0">
             {([
               { mode: 'all' as const, label: 'All' },
               { mode: 'review' as const, label: `Missed (${reviewCount})` },
@@ -258,8 +259,8 @@ export const PracticeEngine: React.FC = () => {
               <button
                 key={mode}
                 onClick={() => { setFilterMode(mode); setCurrentIndex(0); }}
-                className={`px-2.5 py-1 rounded-md text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
-                  filterMode === mode ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'
+                className={`px-2.5 py-1 rounded-md text-[11px] sm:text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                  filterMode === mode ? 'bg-white text-slate-900 shadow-xs' : 'text-slate-500 hover:text-slate-700'
                 }`}
               >
                 {label}
@@ -272,25 +273,25 @@ export const PracticeEngine: React.FC = () => {
       {/* Main Question Card */}
       <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden card-shadow-md">
 
-        {/* Card top bar — chapter + progress */}
-        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">
+        {/* Card top bar */}
+        <div className="px-4 py-3 sm:px-6 sm:py-4 border-b border-slate-100 flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 truncate">
+            <span className="text-[11px] sm:text-xs font-semibold text-emerald-700 bg-emerald-50 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md truncate max-w-[140px] sm:max-w-none">
               {currentQuestion.chapterTitle}
             </span>
-            <span className="text-xs text-slate-400 font-medium">
-              {currentQuestion.type === 'multiple_choice' ? 'Multiple choice' : 'Written answer'}
+            <span className="text-[11px] sm:text-xs text-slate-400 font-medium whitespace-nowrap">
+              {currentQuestion.type === 'multiple_choice' ? 'MCQ' : 'Written'}
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={() => toggleBookmark(currentQuestion.id)}
-              title="Save for later"
-              className={`p-2 rounded-lg border transition-all cursor-pointer ${
+              title="Save question"
+              className={`p-2 rounded-lg border transition-all cursor-pointer min-w-[36px] min-h-[36px] flex items-center justify-center ${
                 bookmarks[currentQuestion.id]
                   ? 'bg-amber-50 text-amber-500 border-amber-200'
-                  : 'text-slate-300 hover:text-slate-500 border-slate-200 hover:border-slate-300'
+                  : 'text-slate-400 hover:text-slate-600 border-slate-200'
               }`}
             >
               {bookmarks[currentQuestion.id] ? (
@@ -299,19 +300,19 @@ export const PracticeEngine: React.FC = () => {
                 <Bookmark className="w-4 h-4" />
               )}
             </button>
-            <span className="text-xs text-slate-400 font-mono tabular-nums">
-              {currentIndex + 1} / {filteredQuestions.length}
+            <span className="text-xs text-slate-400 font-mono tabular-nums px-1.5">
+              {currentIndex + 1}/{filteredQuestions.length}
             </span>
           </div>
         </div>
 
-        <div className="px-6 py-6 space-y-6">
-          {/* Question title */}
+        <div className="p-4 sm:p-6 space-y-4 sm:space-y-5">
+          {/* Question title & prompt */}
           <div>
-            <h2 className="text-lg sm:text-xl font-bold text-slate-900 leading-snug">
+            <h2 className="text-base sm:text-xl font-bold text-slate-900 leading-snug">
               {currentQuestion.title}
             </h2>
-            <div className="text-sm text-slate-600 mt-2 leading-relaxed">
+            <div className="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
               {currentQuestion.prompt.split('\n').map((line, idx) => (
                 <p key={idx} className={idx > 0 ? 'mt-1.5' : ''}>
                   {line}
@@ -323,40 +324,38 @@ export const PracticeEngine: React.FC = () => {
           {/* Code snippet */}
           {currentQuestion.codeSnippet && (
             <div className="rounded-xl bg-slate-900 border border-slate-800 overflow-hidden">
-              <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-slate-800">
+              <div className="flex items-center gap-1.5 px-3 py-2 border-b border-slate-800">
                 <span className="editor-dot bg-rose-400" />
                 <span className="editor-dot bg-amber-400" />
                 <span className="editor-dot bg-emerald-400" />
-                <span className="text-slate-500 text-xs font-mono ml-2">snippet.asm</span>
+                <span className="text-slate-500 text-[11px] font-mono ml-2">snippet.asm</span>
               </div>
-              <pre className="px-4 py-4 text-xs font-mono text-emerald-300 leading-relaxed overflow-x-auto">
+              <pre className="p-3 sm:p-4 text-[11px] sm:text-xs font-mono text-emerald-300 leading-relaxed overflow-x-auto">
                 {currentQuestion.codeSnippet}
               </pre>
             </div>
           )}
 
-          {/* Input area */}
+          {/* Input Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             {currentQuestion.type === 'multiple_choice' ? (
-              <div className="space-y-2.5">
+              <div className="space-y-2 sm:space-y-2.5">
                 {currentQuestion.options?.map((option, idx) => {
                   const isSelected = selectedOption === idx;
                   const isThisCorrect = idx === currentQuestion.correctOptionIndex;
-
-                  let baseClass = 'option-btn w-full text-left rounded-xl border flex items-start gap-4 p-4 cursor-pointer transition-all';
 
                   let stateClass = 'border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/40 bg-white';
 
                   if (isSubmitted) {
                     if (isThisCorrect) {
-                      stateClass = 'border-emerald-400 bg-emerald-50 text-emerald-900';
+                      stateClass = 'border-emerald-400 bg-emerald-50 text-emerald-900 font-semibold';
                     } else if (isSelected && !isThisCorrect) {
                       stateClass = 'border-rose-400 bg-rose-50 text-rose-900';
                     } else {
-                      stateClass = 'border-slate-100 bg-slate-50 opacity-50 cursor-default';
+                      stateClass = 'border-slate-100 bg-slate-50 opacity-40 cursor-default';
                     }
                   } else if (isSelected) {
-                    stateClass = 'border-emerald-500 bg-emerald-50/60 shadow-sm';
+                    stateClass = 'border-emerald-500 bg-emerald-50/70 shadow-xs';
                   }
 
                   return (
@@ -365,11 +364,10 @@ export const PracticeEngine: React.FC = () => {
                       type="button"
                       disabled={isSubmitted}
                       onClick={() => setSelectedOption(idx)}
-                      className={`${baseClass} ${stateClass}`}
+                      className={`option-btn w-full text-left rounded-xl border flex items-start gap-3 p-3 sm:p-4 cursor-pointer transition-all min-h-[48px] ${stateClass}`}
                     >
-                      {/* Letter badge */}
                       <div
-                        className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 transition-all ${
+                        className={`w-6 h-6 sm:w-7 sm:h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 transition-all ${
                           isSubmitted && isThisCorrect
                             ? 'bg-emerald-500 text-white'
                             : isSubmitted && isSelected && !isThisCorrect
@@ -381,7 +379,9 @@ export const PracticeEngine: React.FC = () => {
                       >
                         {optionLetters[idx]}
                       </div>
-                      <span className="text-sm font-medium leading-relaxed flex-1">{option}</span>
+                      <span className="text-xs sm:text-sm font-medium leading-relaxed flex-1 pt-0.5">
+                        {option}
+                      </span>
                       {isSubmitted && isThisCorrect && (
                         <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
                       )}
@@ -394,10 +394,10 @@ export const PracticeEngine: React.FC = () => {
               </div>
             ) : (
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">
-                  Your answer
+                <label className="block text-xs sm:text-sm font-semibold text-slate-700">
+                  Type your exact answer
                   {currentQuestion.answerUnit && (
-                    <span className="text-slate-400 font-normal ml-2">({currentQuestion.answerUnit})</span>
+                    <span className="text-slate-400 font-normal ml-1.5">({currentQuestion.answerUnit})</span>
                   )}
                 </label>
                 <input
@@ -417,9 +417,9 @@ export const PracticeEngine: React.FC = () => {
               </div>
             )}
 
-            {/* Action row */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
-              <div className="flex items-center gap-2">
+            {/* Action Row — Mobile optimized (full width buttons on mobile) */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pt-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                 {!isSubmitted ? (
                   <button
                     type="submit"
@@ -428,17 +428,17 @@ export const PracticeEngine: React.FC = () => {
                         ? selectedOption === null
                         : !typedInput.trim()
                     }
-                    className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-lg text-sm transition-colors cursor-pointer"
+                    className="w-full sm:w-auto px-6 py-3 sm:py-2.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold rounded-xl text-sm transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-xs"
                   >
                     Check answer
                   </button>
                 ) : (
-                  <>
+                  <div className="flex items-center gap-2 w-full sm:w-auto">
                     {!isCorrect && (
                       <button
                         type="button"
                         onClick={handleRetry}
-                        className="px-4 py-2 border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-lg text-sm transition-colors flex items-center gap-2 cursor-pointer"
+                        className="flex-1 sm:flex-initial px-4 py-2.5 border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 font-semibold rounded-xl text-xs sm:text-sm transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
                       >
                         <RotateCcw className="w-4 h-4" />
                         Try again
@@ -447,33 +447,33 @@ export const PracticeEngine: React.FC = () => {
                     <button
                       type="button"
                       onClick={handleNext}
-                      className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-lg text-sm transition-colors flex items-center gap-2 cursor-pointer"
+                      className="flex-1 sm:flex-initial px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-xs sm:text-sm transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
                     >
-                      Next question
+                      Next
                       <ArrowRight className="w-4 h-4" />
                     </button>
-                  </>
+                  </div>
                 )}
               </div>
 
               {/* Prev / Next navigation */}
-              <div className="flex items-center gap-1">
+              <div className="flex items-center justify-between sm:justify-end gap-1.5 border-t sm:border-t-0 pt-2 sm:pt-0 border-slate-100">
                 <button
                   type="button"
                   onClick={handlePrevious}
                   disabled={currentIndex === 0}
-                  className="p-2 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-30 text-slate-500 cursor-pointer transition-colors"
-                  title="Previous question"
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1 px-3 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-30 text-slate-600 text-xs font-semibold cursor-pointer"
                 >
                   <ChevronLeft className="w-4 h-4" />
+                  <span>Prev</span>
                 </button>
                 <button
                   type="button"
                   onClick={handleNext}
                   disabled={currentIndex === filteredQuestions.length - 1}
-                  className="p-2 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-30 text-slate-500 cursor-pointer transition-colors"
-                  title="Next question"
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1 px-3 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 disabled:opacity-30 text-slate-600 text-xs font-semibold cursor-pointer"
                 >
+                  <span>Next</span>
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>
@@ -483,27 +483,27 @@ export const PracticeEngine: React.FC = () => {
           {/* Feedback & Answer Reveal */}
           {isSubmitted && (
             <div
-              className={`rounded-xl border overflow-hidden ${
+              className={`rounded-xl border overflow-hidden transition-all ${
                 isCorrect
                   ? 'border-emerald-200 bg-emerald-50/60'
                   : 'border-rose-200 bg-rose-50/60'
               }`}
             >
               {/* Status bar */}
-              <div className={`flex items-center justify-between px-5 py-3.5 ${isCorrect ? 'bg-emerald-100/70' : 'bg-rose-100/70'}`}>
-                <div className="flex items-center gap-3">
+              <div className={`flex items-center justify-between px-4 py-3 ${isCorrect ? 'bg-emerald-100/70' : 'bg-rose-100/70'}`}>
+                <div className="flex items-center gap-2.5">
                   {isCorrect ? (
                     <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                   ) : (
                     <XCircle className="w-5 h-5 text-rose-600 shrink-0" />
                   )}
                   <div>
-                    <span className={`font-bold text-sm ${isCorrect ? 'text-emerald-900' : 'text-rose-900'}`}>
-                      {isCorrect ? 'Correct — +100 pts 🎉' : 'Not quite right'}
+                    <span className={`font-bold text-xs sm:text-sm ${isCorrect ? 'text-emerald-900' : 'text-rose-900'}`}>
+                      {isCorrect ? 'Correct — +100 pts 🎉' : 'Incorrect answer'}
                     </span>
                     {!isCorrect && (
-                      <span className="text-xs text-rose-700 font-medium block">
-                        The verified answer is shown below.
+                      <span className="text-[11px] text-rose-700 font-medium block">
+                        Correct solution revealed below:
                       </span>
                     )}
                   </div>
@@ -511,20 +511,20 @@ export const PracticeEngine: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setShowExplanation(!showExplanation)}
-                  className="text-xs font-semibold text-slate-600 hover:text-slate-900 flex items-center gap-1 cursor-pointer"
+                  className="text-xs font-semibold text-slate-600 hover:text-slate-900 flex items-center gap-1 cursor-pointer bg-white/70 px-2.5 py-1 rounded-md"
                 >
-                  {showExplanation ? 'Hide' : 'Full solution'}
+                  <span>{showExplanation ? 'Hide' : 'Solution'}</span>
                   {showExplanation ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
                 </button>
               </div>
 
-              {/* Correct answer highlight */}
-              <div className="px-5 py-4 space-y-3">
+              {/* Correct answer text */}
+              <div className="px-4 py-3 sm:px-5 sm:py-4 space-y-3">
                 <div className="flex items-start gap-2.5">
                   <Lightbulb className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                   <div>
-                    <div className="text-xs font-semibold text-slate-500 mb-1">Correct answer</div>
-                    <div className="font-mono font-bold text-base text-emerald-700">
+                    <div className="text-[11px] font-semibold text-slate-500">Verified Answer</div>
+                    <div className="font-mono font-bold text-sm sm:text-base text-emerald-800 break-all">
                       {currentQuestion.type === 'multiple_choice'
                         ? currentQuestion.options?.[currentQuestion.correctOptionIndex ?? 0]
                         : currentQuestion.correctAnswers?.[0]}
@@ -532,23 +532,23 @@ export const PracticeEngine: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Detailed explanation (toggled) */}
+                {/* Detailed explanation */}
                 {showExplanation && (
-                  <div className="border-t border-slate-200 pt-3 space-y-3">
-                    <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 uppercase tracking-wide">
-                      <BookOpen className="w-3.5 h-3.5 text-emerald-500" />
+                  <div className="border-t border-slate-200/80 pt-3 space-y-2.5">
+                    <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-500 uppercase tracking-wide">
+                      <BookOpen className="w-3.5 h-3.5 text-emerald-600" />
                       Explanation
                     </div>
-                    <p className="text-sm text-slate-700 leading-relaxed">{currentQuestion.explanation}</p>
+                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">{currentQuestion.explanation}</p>
 
                     {currentQuestion.detailedSteps && currentQuestion.detailedSteps.length > 0 && (
-                      <div className="rounded-lg bg-white border border-slate-200 p-4 font-mono text-xs space-y-2">
-                        <span className="text-emerald-700 font-semibold text-[11px] uppercase tracking-wide block">
+                      <div className="rounded-lg bg-white border border-slate-200 p-3 sm:p-4 font-mono text-[11px] sm:text-xs space-y-1.5">
+                        <span className="text-emerald-700 font-semibold text-[10px] sm:text-[11px] uppercase tracking-wide block">
                           Step-by-step working
                         </span>
                         {currentQuestion.detailedSteps.map((step, sIdx) => (
                           <div key={sIdx} className="flex items-start gap-2 text-slate-600">
-                            <span className="text-emerald-400 font-bold select-none shrink-0">{sIdx + 1}.</span>
+                            <span className="text-emerald-500 font-bold select-none shrink-0">{sIdx + 1}.</span>
                             <span className="leading-relaxed">{step}</span>
                           </div>
                         ))}
@@ -556,7 +556,7 @@ export const PracticeEngine: React.FC = () => {
                     )}
 
                     {currentQuestion.referenceSection && (
-                      <div className="text-[11px] text-slate-400 italic">
+                      <div className="text-[10px] sm:text-[11px] text-slate-400 italic">
                         📖 {currentQuestion.referenceSection}
                       </div>
                     )}
