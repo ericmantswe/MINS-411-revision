@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    background-color: #f0f7f2;
+    color: #0f172a;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Refined scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #c8e6d4;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #10b981;
+}
+
+/* Monospace font */
+.font-mono-code {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* Hide scrollbar but keep functionality */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Subtle card shadow — natural, not AI-uniform */
+.card-shadow {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px -4px rgba(16, 163, 79, 0.07);
+}
+
+.card-shadow-md {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 24px -6px rgba(16, 163, 79, 0.1);
+}
+
+/* Answer option press feel */
+.option-btn {
+  transition: transform 80ms ease, box-shadow 80ms ease, background-color 120ms ease, border-color 120ms ease;
+}
+.option-btn:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+/* Editor window dot styling */
+.editor-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
